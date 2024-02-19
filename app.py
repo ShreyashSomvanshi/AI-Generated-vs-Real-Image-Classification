@@ -2,6 +2,11 @@ import streamlit as st
 import tensorflow as tf
 import urllib.request
 from PIL import Image
+import subprocess
+
+if not os.path.isfile('model.h5'):
+    subprocess.run(['curl --output model.h5 "https://github.com/ShreyashSomvanshi/SynthCheck-A-Synthetic-Image-Identification-using-Deep-Learning/releases/download/testing-model/AIGeneratedModel.h5"'], shell=True)
+
 
 st.set_page_config(
     page_title="SynthCheck",
@@ -16,7 +21,7 @@ st.title('SynthCheck: A Synthetic Image Identifier ')
 
 
 
-model = None
+# model = None
 #labels = ['real', 'fake']
 
 
@@ -25,17 +30,18 @@ model = None
 @st.cache
 def load_model():
     global model
-    url = 'https://github.com/ShreyashSomvanshi/SynthCheck-A-Synthetic-Image-Identification-using-Deep-Learning/releases/download/testing-model/AIGeneratedModel.h5'
-    filename = url.split('/')[-1]
-    download_model = urllib.request.urlretrieve(url, filename)
-    model = tf.keras.models.load_model(download_model)
+    # url = 'https://github.com/ShreyashSomvanshi/SynthCheck-A-Synthetic-Image-Identification-using-Deep-Learning/releases/download/testing-model/AIGeneratedModel.h5'
+    # filename = url.split('/')[-1]
+    # download_model = urllib.request.urlretrieve(url, filename)
+    model = tf.keras.models.load_model('model.h5', compile=False)
+    # model = tf.keras.models.load_model(download_model)
 
     #model = tf.keras.models.load_model('AIGeneratedModel.h5')
 
 
 def classify_image(file_path):
-    if model is None:
-        load_model()
+    # if model is None:
+    load_model()
 # 
     image = Image.open(file_path) # reading the image
     image = image.resize((32, 32)) # resizing the image to fit the trained model
