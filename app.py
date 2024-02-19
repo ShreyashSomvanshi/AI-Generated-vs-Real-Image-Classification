@@ -29,40 +29,42 @@ st.title('SynthCheck: A Synthetic Image Identifier ')
 
 
 @st.cache
-def load_model():
-    global model
-    # url = 'https://github.com/ShreyashSomvanshi/SynthCheck-A-Synthetic-Image-Identification-using-Deep-Learning/releases/download/testing-model/AIGeneratedModel.h5'
-    # filename = url.split('/')[-1]
-    # download_model = urllib.request.urlretrieve(url, filename)
-    model = tf.keras.models.load_model('model.h5', compile=False)
-    # model = tf.keras.models.load_model(download_model)
+# def load_model():
+#     global model
+#     # url = 'https://github.com/ShreyashSomvanshi/SynthCheck-A-Synthetic-Image-Identification-using-Deep-Learning/releases/download/testing-model/AIGeneratedModel.h5'
+#     # filename = url.split('/')[-1]
+#     # download_model = urllib.request.urlretrieve(url, filename)
+#     model = tf.keras.models.load_model('model.h5', compile=False)
+#     # model = tf.keras.models.load_model(download_model)
 
     #model = tf.keras.models.load_model('AIGeneratedModel.h5')
 
 
 def classify_image(file_path):
     # if model is None:
-    load_model()
+    # load_model()
+    model = tf.keras.models.load_model('model.h5', compile=False)
 # 
     image = Image.open(file_path) # reading the image
     image = image.resize((32, 32)) # resizing the image to fit the trained model
-#     image = image.convert("RGB") # converting the image to RGB
+    
     img = np.asarray(image) # converting it to numpy array
     img = np.expand_dims(img/255, 0)
     predictions = model.predict(img) # predicting the label
-    # label = labels[np.argmax(predictions[0])] # extracting the label with maximum probablity
+#     label = labels[np.argmax(predictions[0])] # extracting the label with maximum probablity
 #     probab = float(round(predictions[0][np.argmax(predictions[0])]*100, 2))
     if predictions > 0.5:
         res = 'Predicted class: REAL'
     else:
         res = 'Predicted class: SYNTHETIC'
-    
+        
+    return res
 #     result = {
 #         'label': label,
 #         'probablity': probab
 #     }
 
-    return res
+    
     
 st.write("Upload an image to check whether it is a fake or real image.")
 
