@@ -27,7 +27,7 @@ def load_model():
     global model
     url = 'https://github.com/ShreyashSomvanshi/SynthCheck-A-Synthetic-Image-Identification-using-Deep-Learning/releases/download/testing-model/AIGeneratedModel.h5'
     filename = url.split('/')[-1]
-    download_model = urllib.request.urlretrieve(url, fileame)
+    download_model = urllib.request.urlretrieve(url, filename)
     model = tf.keras.models.load_model(download_model)
 
     #model = tf.keras.models.load_model('AIGeneratedModel.h5')
