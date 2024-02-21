@@ -6,7 +6,7 @@ import subprocess
 import os
 
 if not os.path.isfile('model.h5'):
-    subprocess.run(['curl --output model.h5 "https://github.com/ShreyashSomvanshi/SynthCheck-A-Synthetic-Image-Identification-using-Deep-Learning/blob/main/Models/firstModel.h5"'], shell = True)
+    subprocess.run(['curl --output model.h5 "https://media.githubusercontent.com/media/ShreyashSomvanshi/SynthCheck/main/firstModel.h5"'], shell = True)
     # subprocess.run(['curl --output model.h5 "https://github.com/ShreyashSomvanshi/SynthCheck-A-Synthetic-Image-Identification-using-Deep-Learning/releases/download/testing-model/AIGeneratedModel.h5"'], shell=True)
 
 st.set_page_config(
@@ -28,7 +28,7 @@ st.title('SynthCheck: A Synthetic Image Identifier ')
 
 
 
-@st.cache
+# @st.cache
 # def load_model():
 #     global model
 #     # url = 'https://github.com/ShreyashSomvanshi/SynthCheck-A-Synthetic-Image-Identification-using-Deep-Learning/releases/download/testing-model/AIGeneratedModel.h5'
